@@ -1,14 +1,55 @@
 .hero {
-  padding: 64px 0;
+  padding: 120px 0; /* moved up a bit to bring hero higher on the page */
 }
 .hero-inner {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 48px; /* larger gap between content and visual */
 }
 .hero-content {
   flex: 1;
   max-width: 640px;
+}
+
+.typewriter {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  color: var(--muted);
+}
+.role-text {
+  font-weight: 600;
+  color: var(--text);
+}
+.type-cursor {
+  display: inline-block;
+  color: var(--accent);
+  animation: blink 1s steps(2, start) infinite;
+}
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+.hero-socials {
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+}
+.hero-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(16, 24, 40, 0.06);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
 }
 .hero-stats {
   display: flex;
@@ -29,14 +70,14 @@
   color: var(--muted);
 }
 .hero-title {
-  font-size: 48px;
+  font-size: 96px; /* larger main heading */
   line-height: 1.02;
   margin-bottom: 12px;
 }
 .hero-sub {
-  font-size: 18px;
+  font-size: 34px; /* larger subheading */
   color: var(--text);
-  font-weight: 600;
+  font-weight: 800;
   margin-bottom: 12px;
 }
 .hero-desc {
@@ -45,7 +86,7 @@
 }
 
 .hero-visual {
-  width: 220px;
+  width: 520px; /* larger visual area */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,13 +94,16 @@
   animation-delay: 160ms;
 }
 .avatar {
-  width: 220px;
-  height: 220px;
-  border-radius: 999px;
+  width: 520px;
+  height: 520px;
+  border-radius: 0; /* remove extra border/frame — show raw photo */
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding: 0; /* ensure no inner padding */
+  background: transparent; /* no background/frame */
+  box-shadow: none; /* remove any accidental shadow */
 }
 .avatar-inner {
   width: 100%;
@@ -67,12 +111,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 44px;
-  font-weight: 700;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #fdf0d6, #e6f0ff);
+  font-size: 80px; /* larger initials fallback */
+  font-weight: 800;
+  border-radius: 0;
+  background: transparent;
   color: var(--text);
-  box-shadow: 0 16px 40px rgba(16, 24, 40, 0.08);
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Softly fade the image edges so the photo blends into the page
+   Uses mask-image (and -webkit-mask-image) for broad browser support.
+   Reduced the opaque center so edges fade more strongly. */
+.avatar-img {
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 1) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
 }
 
 /* hero actions */
@@ -80,6 +142,15 @@
   margin-top: 20px;
   display: flex;
   gap: 12px;
+  align-items: center;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid rgba(16, 24, 40, 0.08);
+  padding: 10px 14px;
+  border-radius: 10px;
 }
 
 .hero-scroll {
@@ -100,22 +171,47 @@
 }
 
 /* responsive */
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .hero-inner {
     flex-direction: column-reverse;
     text-align: center;
+    gap: 20px;
   }
   .hero-visual {
-    width: 160px;
+    width: 320px;
   }
   .avatar {
-    width: 160px;
-    height: 160px;
+    width: 320px;
+    height: 320px;
+    border-radius: 0;
   }
   .hero-title {
-    font-size: 34px;
+    font-size: 56px;
+  }
+  .hero-sub {
+    font-size: 22px;
   }
   .hero-actions {
     justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-inner {
+    gap: 12px;
+  }
+  .hero-visual {
+    width: 220px;
+  }
+  .avatar {
+    width: 220px;
+    height: 220px;
+    border-radius: 0;
+  }
+  .hero-title {
+    font-size: 36px;
+  }
+  .hero-sub {
+    font-size: 16px;
   }
 }

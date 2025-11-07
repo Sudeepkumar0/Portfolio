@@ -3,25 +3,26 @@
   background: transparent;
   color: #7e7474;
   position: sticky;
-  top: 0;
+  top: 12px; /* push navbar down slightly from the top of the viewport */
   z-index: 50;
   transition: background-color 220ms ease, box-shadow 220ms ease,
-    backdrop-filter 220ms ease;
+    backdrop-filter 220ms ease, padding 220ms ease, min-height 220ms ease;
   /* make navbar visually smaller via variables (declared below) */
   font-size: var(--nav-font-size, 14px);
 }
 
 /* sizing variables (override these to change navbar size quickly) */
 :root {
-  --nav-font-size: 14px;
-  --nav-padding-y: 0.35rem;
-  --nav-padding-x: 0.9rem;
-  --nav-min-height: 44px;
-  --brand-font-size: 0.95rem;
-  --toggle-size: 1rem;
-  --links-gap: 0.6rem;
-  --link-pad-y: 0.25rem;
-  --link-pad-x: 0.45rem;
+  --nav-font-size: 15px;
+  --nav-padding-y: 0.8rem; /* increased vertical padding */
+  --nav-padding-x: 1rem;
+  --nav-min-height: 72px; /* taller navbar */
+  --nav-center-min-width: 560px;
+  --brand-font-size: 1.05rem;
+  --toggle-size: 1.2rem;
+  --links-gap: 0.8rem;
+  --link-pad-y: 0.35rem;
+  --link-pad-x: 0.6rem;
 }
 
 .site-navbar.scrolled {
@@ -30,32 +31,113 @@
   box-shadow: 0 8px 30px rgba(16, 24, 40, 0.06);
   -webkit-backdrop-filter: saturate(120%) blur(6px);
   backdrop-filter: saturate(120%) blur(6px);
+  /* reduce sizing via CSS variables for an easy, animated shrink */
+  --nav-min-height: 56px;
+  --nav-padding-y: 0.45rem;
+  /* keep font sizes unchanged on scroll (override removed) */
 }
 .nav-container {
-  max-width: 1000px;
+  max-width: 1000px; /* reduce to better fit the tightened center bar */
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  /* reduced vertical padding to shrink navbar height */
-  padding: 0.35rem 0.9rem;
-  min-height: 44px;
+  /* center the middle bar; left/right pills will be absolutely placed */
+  justify-content: center;
+  padding: var(--nav-padding-y) var(--nav-padding-x);
+  min-height: var(--nav-min-height);
+  transition: padding 220ms ease, min-height 220ms ease;
 }
 .nav-brand {
   font-weight: 700;
   letter-spacing: 0.5px;
-  font-size: 0.95rem;
+  /* keep brand font size stable even when `.scrolled` toggles */
+  font-size: 1.05rem;
   color: var(--text);
+  transition: transform 220ms ease; /* do not animate font-size */
+}
+/* --- New pill & center bar layout --- */
+.nav-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  box-shadow: 0 6px 22px rgba(16, 24, 40, 0.06);
+  font-size: 0.9rem;
+  color: var(--text);
+}
+.nav-left {
+  margin-right: 0.6rem;
+  position: absolute;
+  left: 8px; /* moved nearer to the viewport left edge for extreme-left placement */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+}
+.nav-right .pill-link {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+}
+/* position right pill flush to the viewport right edge */
+.nav-right {
+  position: absolute;
+  right: 8px; /* nearer to the viewport right edge */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+}
+.status-dot {
+  width: 10px;
+  height: 10px;
+  background: #2ecc71; /* green */
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.08);
+  display: inline-block;
+}
+
+.nav-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* brand left, links right */
+  gap: 0.85rem;
+  background: rgba(255, 255, 255, 0.98);
+  padding: 0.4rem 0.8rem; /* slightly reduced padding to tighten width */
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(16, 24, 40, 0.07);
+  /* keep center block centered inside the container */
+  margin: 0 auto;
+  min-width: var(--nav-center-min-width);
+  z-index: 20;
+}
+.brand-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #0b0b0b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.12);
+  flex: 0 0 auto;
+  margin-right: 0.6rem;
+}
+.brand-initials {
+  font-size: 0.95rem;
+  letter-spacing: 0.6px;
 }
 .nav-toggle {
   background: transparent;
   border: none;
   color: var(--text);
-  font-size: 1rem;
+  font-size: var(--toggle-size);
   display: none;
   cursor: pointer;
   line-height: 1;
-  padding: 6px;
+  padding: 8px;
 }
 .nav-links {
   list-style: none;
@@ -63,12 +145,14 @@
   margin: 0;
   padding: 0;
   gap: 0.6rem;
+  flex: 0 0 auto;
 }
 .nav-links li a {
   color: var(--text);
   text-decoration: none;
   border-radius: 8px;
   padding: var(--link-pad-y) var(--link-pad-x);
+  font-size: 0.95rem; /* fixed size so scroll doesn't shrink it */
 }
 .nav-links li a:hover {
   background: rgba(255, 255, 255, 0.06);
@@ -79,16 +163,42 @@
   .nav-toggle {
     display: inline-flex;
   }
+  /* On small screens: hide inline pills and show collapsed menu */
+  .nav-pill {
+    display: none;
+  }
+  /* Make the center block align left on mobile and allow the toggle to sit right */
+  .nav-container {
+    justify-content: space-between;
+    padding: var(--nav-padding-y) 12px;
+  }
+
+  .nav-center {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    min-width: 0; /* allow it to collapse on small screens */
+    width: auto;
+    margin: 0; /* align with container padding */
+    justify-content: flex-start; /* brand left, links to follow */
+    gap: 0.5rem;
+  }
+  .brand-circle {
+    margin-right: 0.5rem;
+  }
   .nav-links {
     position: absolute;
     top: 100%;
     right: 0;
-    background: linear-gradient(180deg, #838485, #a1b2d4);
+    background: rgba(255, 255, 255, 0.98);
     flex-direction: column;
-    width: 200px;
-    transform: translateY(-8px);
+    width: 220px;
+    transform: translateY(-6px);
     opacity: 0;
     pointer-events: none;
+    border-radius: 10px;
+    padding: 0.5rem;
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.12);
     transition: opacity 160ms ease, transform 160ms ease;
   }
   .nav-links.open {

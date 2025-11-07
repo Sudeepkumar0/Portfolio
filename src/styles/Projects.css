@@ -1,0 +1,140 @@
+.projects-section {
+  padding: 40px 0 64px;
+}
+
+.projects-section .section-title {
+  font-size: 2.4rem;
+  margin-bottom: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  /* stretch cards so their bodies can align CTAs at the same baseline */
+  align-items: stretch;
+}
+
+.project-card {
+  background: transparent;
+  position: relative;
+  overflow: visible; /* allow rotated visuals to extend outside */
+  display: flex;
+  flex-direction: column;
+}
+
+.project-visual {
+  height: 320px;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 320ms cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 220ms;
+  box-shadow: 0 12px 40px rgba(12, 20, 30, 0.08);
+}
+
+.project-poster {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* subtle background variations for placeholders */
+.visual-1 {
+  background: linear-gradient(135deg, #f7c6c7 0%, #ffd6a5 100%);
+  transform: rotate(-6deg) translateY(-6px);
+}
+.visual-2 {
+  background: linear-gradient(135deg, #ffd6a5 0%, #c2e9fb 100%);
+  transform: rotate(4deg) translateY(0);
+}
+.visual-3 {
+  background: linear-gradient(135deg, #c2e9fb 0%, #d4c1ec 100%);
+  transform: rotate(-3deg) translateY(4px);
+}
+
+.project-number {
+  position: absolute;
+  right: 18px;
+  bottom: 10px;
+  font-size: 140px;
+  font-weight: 700;
+  color: rgba(8, 8, 8, 0.08);
+  pointer-events: none;
+  line-height: 0.9;
+}
+
+/* Counter-rotate the large number so it stays upright despite the poster tilt */
+.visual-1 .project-number {
+  transform: rotate(6deg);
+}
+.visual-2 .project-number {
+  transform: rotate(-4deg);
+}
+.visual-3 .project-number {
+  transform: rotate(3deg);
+}
+
+.project-body {
+  padding: 18px 6px 18px;
+  /* make body stretch so CTA can be pushed to the bottom */
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.project-title {
+  margin: 6px 0;
+  font-size: 1.05rem;
+}
+
+.project-desc {
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.project-cta {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  /* ensure the CTA sits at the bottom of the project body */
+  margin-top: auto;
+  /* size to content instead of stretching full width */
+  align-self: flex-start;
+  white-space: nowrap;
+}
+
+.project-cta:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 980px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  .project-visual {
+    height: 260px;
+  }
+  .project-number {
+    font-size: 110px;
+    right: 12px;
+    bottom: 6px;
+  }
+}
