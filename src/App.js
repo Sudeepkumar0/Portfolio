@@ -24,12 +24,15 @@ function App() {
           <div className="about-grid">
             <div className="about-left fade-up">
               <p>
-                I'm a Computer Science student focused on web development and
-                software engineering. I enjoy building practical, well-tested
-                projects while learning modern tools and best practices. I'm
-                currently studying at NMIT Bangalore and actively working on
-                coursework and personal projects to strengthen my full-stack
-                skills.
+                I'm a Computer Science student currently pursuing an MCA at NMIT
+                Bangalore with a focus on web development and software
+                engineering. I enjoy building practical, well-tested projects
+                using React, Node.js and SQL, and I like exploring modern
+                tooling such as TypeScript, containerization, and CI/CD. Through
+                coursework in algorithms, databases and software engineering,
+                and via personal and open-source projects, I&nbsp;build and ship
+                end-to-end features. I'm actively seeking internships and
+                collaborative opportunities to grow as a full-stack developer.
               </p>
             </div>
 
@@ -45,10 +48,11 @@ function App() {
 
                 <div className="stat-image card" style={{ marginTop: 16 }}>
                   <img
-                    src={process.env.PUBLIC_URL + "/images/avatar.jpg"}
+                    src={process.env.PUBLIC_URL + "/images/avatar1.png"}
                     alt="avatar"
                     style={{
                       width: "100%",
+                      height: "0%",
                       display: "block",
                       borderRadius: 8,
                       objectFit: "cover",
@@ -61,7 +65,8 @@ function App() {
             <div className="about-right fade-up">
               <div className="mini-avatar card">
                 <img
-                  src={process.env.PUBLIC_URL + "/images/avatar.jpg"}
+                  className="mini-av-img"
+                  src={process.env.PUBLIC_URL + "/images/avatar1.png"}
                   alt="avatar small"
                   style={{
                     width: "100%",

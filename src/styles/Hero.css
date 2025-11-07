@@ -80,6 +80,14 @@
   font-weight: 800;
   margin-bottom: 12px;
 }
+.hero-name {
+  display: inline;
+}
+.hero-sub-desc {
+  display: inline;
+  font-weight: 600;
+  color: var(--muted);
+}
 .hero-desc {
   color: var(--muted);
   margin-top: 8px;
@@ -153,6 +161,14 @@
   border-radius: 10px;
 }
 
+/* Give hero action buttons a soft shadow on larger screens so they lift
+   off the page. Keep a short transition for hover/press feedback. */
+.hero .hero-actions .btn,
+.hero .hero-actions a.btn-outline {
+  box-shadow: 0 8px 20px rgba(16, 24, 40, 0.08);
+  transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
 .hero-scroll {
   margin-top: 32px;
   font-size: 13px;
@@ -213,5 +229,73 @@
   }
   .hero-sub {
     font-size: 16px;
+  }
+  /* Remove extra top spacing on narrow screens so hero sits closer to viewport top */
+  .hero {
+    padding: 5px 0;
+  }
+  /* On small screens, hide only the subtitle description but keep the name visible */
+  .hero-sub-desc {
+    display: none;
+  }
+  .typewriter {
+    margin-top: 6px;
+    font-size: 18px;
+    justify-content: center;
+  }
+  .role-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* Mobile: wrap social icons in a centered pill with transparent bg and 1px black border */
+  .hero-socials {
+    margin: 12px auto;
+    display: flex;
+    gap: 10px;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    border: 1px solid #000;
+    background: transparent;
+    justify-content: center;
+    align-items: center;
+    width: -moz-fit-content;
+    width: fit-content;
+  }
+  .hero-socials a {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  /* Mobile: make hero action buttons text-first with a subtle outlined
+     style instead of an underline. Transparent background + 1px black
+     border so they remain tappable and visually distinct. */
+  .hero .hero-actions .btn,
+  .hero .hero-actions a.btn-outline,
+  .hero .hero-actions a {
+    background: transparent !important;
+    text-decoration: none !important;
+    font-size: 13px;
+    color: var(--muted);
+    border: 1px solid rgba(0, 0, 0, 1) !important;
+    padding: 6px 8px;
+    border-radius: 6px;
+    box-shadow: none !important;
+  }
+  .hero .hero-actions .btn:hover,
+  .hero .hero-actions a.btn-outline:hover,
+  .hero .hero-actions a:hover {
+    color: var(--muted);
+    background: transparent !important;
+    text-decoration: none !important;
+    box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
   }
 }

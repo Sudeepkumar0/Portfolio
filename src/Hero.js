@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./styles/Hero.css";
+import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
 export default function Hero() {
   const [imgLoaded, setImgLoaded] = useState(false);
@@ -43,7 +44,8 @@ export default function Hero() {
         <div className="hero-content fade-up">
           <h1 className="hero-title">Hello</h1>
           <h3 className="hero-sub">
-            It's G Sudeep Kumar, a sofware enthusiast!
+            It's <span className="hero-name">G Sudeep Kumar</span>
+            <span className="hero-sub-desc">, a software enthusiast!</span>
           </h3>
           <div className="typewriter" aria-hidden="false">
             <span className="role-text">{displayed}</span>
@@ -51,23 +53,23 @@ export default function Hero() {
           </div>
           <div className="hero-socials">
             <a href="mailto:sudeepkumar.connect@gmail.com" aria-label="email">
-              ✉
+              <FaEnvelope aria-hidden="true" />
             </a>
             <a
-              href="https://github.com/your-username"
+              href="https://github.com/sudeepkumar0"
               target="_blank"
               rel="noreferrer"
               aria-label="github"
             >
-              G
+              <FaGithub aria-hidden="true" />
             </a>
             <a
-              href="https://linkedin.com/in/your-username"
+              href="https://www.linkedin.com/in/g-sudeep-kumar-aa1bb6253/"
               target="_blank"
               rel="noreferrer"
               aria-label="linkedin"
             >
-              in
+              <FaLinkedin aria-hidden="true" />
             </a>
           </div>
           <p className="hero-desc">
@@ -83,7 +85,7 @@ export default function Hero() {
             <a className="btn btn-ghost" href="#contact">
               Contact Me
             </a>
-            <a className="btn btn-outline" href="/resume.pdf" download>
+            <a className="btn btn-outline" href="docs/resume.pdf" download>
               Download CV
             </a>
           </div>

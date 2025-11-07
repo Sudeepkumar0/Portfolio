@@ -60,6 +60,13 @@ p {
   font-weight: 600;
   cursor: pointer;
   border: none;
+  /* ensure anchor buttons don't show the browser's default underline */
+  text-decoration: none;
+}
+.btn:hover,
+.btn:focus,
+.btn:active {
+  text-decoration: none;
 }
 .btn-primary {
   background: var(--accent);
@@ -173,6 +180,13 @@ p {
   }
 }
 
+/* Faster fade-in on mobile to reduce perceived lag while scrolling */
+@media (max-width: 640px) {
+  .fade-up {
+    transition: opacity 320ms ease, transform 320ms ease;
+  }
+}
+
 /* About section layout */
 .about-section {
   padding: 18px 0 36px;
@@ -275,7 +289,11 @@ p {
   .mini-avatar {
     width: 160px;
     height: 160px;
+    display: none;
   }
+  /* .mini-av-img {
+    display: none;
+  } */
   .stat-image img {
     height: 160px;
   }
