@@ -1,0 +1,102 @@
+.site-navbar {
+  /* start transparent at top; will gain `.scrolled` for visible background */
+  background: transparent;
+  color: #7e7474;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: background-color 220ms ease, box-shadow 220ms ease,
+    backdrop-filter 220ms ease;
+  /* make navbar visually smaller via variables (declared below) */
+  font-size: var(--nav-font-size, 14px);
+}
+
+/* sizing variables (override these to change navbar size quickly) */
+:root {
+  --nav-font-size: 14px;
+  --nav-padding-y: 0.35rem;
+  --nav-padding-x: 0.9rem;
+  --nav-min-height: 44px;
+  --brand-font-size: 0.95rem;
+  --toggle-size: 1rem;
+  --links-gap: 0.6rem;
+  --link-pad-y: 0.25rem;
+  --link-pad-x: 0.45rem;
+}
+
+.site-navbar.scrolled {
+  /* translucent cream background on scroll (matches --bg: #f8eee9) */
+  background: rgba(248, 238, 233, 0.95);
+  box-shadow: 0 8px 30px rgba(16, 24, 40, 0.06);
+  -webkit-backdrop-filter: saturate(120%) blur(6px);
+  backdrop-filter: saturate(120%) blur(6px);
+}
+.nav-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* reduced vertical padding to shrink navbar height */
+  padding: 0.35rem 0.9rem;
+  min-height: 44px;
+}
+.nav-brand {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+.nav-toggle {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 1rem;
+  display: none;
+  cursor: pointer;
+  line-height: 1;
+  padding: 6px;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 0.6rem;
+}
+.nav-links li a {
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 8px;
+  padding: var(--link-pad-y) var(--link-pad-x);
+}
+.nav-links li a:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .nav-toggle {
+    display: inline-flex;
+  }
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: linear-gradient(180deg, #838485, #a1b2d4);
+    flex-direction: column;
+    width: 200px;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 160ms ease, transform 160ms ease;
+  }
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .nav-links li {
+    padding: 0.5rem 0.8rem;
+  }
+}
