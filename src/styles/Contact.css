@@ -14,7 +14,7 @@
 .contact-inner {
   /* slight contrast from the page background so the form reads as a panel */
   background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(16, 24, 40, 0.06);
+  border: 1px solid #000;
   border-radius: 14px;
   padding: 22px;
   box-shadow: none;

@@ -44,8 +44,8 @@ export default function Hero() {
         <div className="hero-content fade-up">
           <h1 className="hero-title">Hello</h1>
           <h3 className="hero-sub">
-            It's <span className="hero-name">G Sudeep Kumar</span>
-            <span className="hero-sub-desc">, a software enthusiast!</span>
+            It's <span className="hero-name">G Sudeep Kumar</span> <br></br>
+            <span className="hero-sub-desc">a software enthusiast!</span>
           </h3>
           <div className="typewriter" aria-hidden="false">
             <span className="role-text">{displayed}</span>

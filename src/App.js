@@ -5,6 +5,7 @@ import "./styles/styles.css";
 import Skills from "./Skills";
 import Contact from "./Contact";
 import Projects from "./Projects";
+import Footer from "./Footer";
 
 function App() {
   return (
@@ -97,6 +98,7 @@ function App() {
 
         <Contact />
       </main>
+      <Footer />
     </>
   );
 }
