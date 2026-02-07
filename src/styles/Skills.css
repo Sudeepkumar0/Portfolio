@@ -1,221 +1,297 @@
-/* Skills section styled to integrate with site background and accent */
+/* ============================================
+   SKILLS SECTION - Professional & Animated
+   ============================================ */
+
 .skills-section {
-  padding: 64px 0;
-  background: var(--bg);
+  position: relative;
+  padding: 100px 0;
+  background: linear-gradient(
+    135deg,
+    var(--bg) 0%,
+    #f8fafc 50%,
+    var(--bg) 100%
+  );
+  overflow: hidden;
+}
+
+/* Animated Background Particles */
+.skills-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  opacity: 0.15;
+  left: var(--x);
+  animation: floatParticle 15s ease-in-out infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes floatParticle {
+  0%,
+  100% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-50vh) scale(1);
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.15;
+  }
+}
+
+/* Header Styles */
+.skills-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.skills-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  background: linear-gradient(135deg, var(--accent), #ff6b6b);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.skills-section.visible .skills-badge {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.skills-title {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800;
   color: var(--text);
-}
-.skills-header h2 {
-  font-size: 48px;
-  margin-bottom: 8px;
-}
-.skills-header .muted {
-  color: rgba(34, 34, 34, 0.7);
-  margin-top: 8px;
-}
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  margin-top: 28px;
-}
-
-/* Horizontal logo loop */
-.logo-loop {
-  display: none; /* no separate logo strip used anymore */
-}
-
-/* Card loop: no CSS transform animation — JS adjusts scrollLeft so manual scroll is possible */
-.card-loop {
-  overflow-x: auto;
-  width: 100%;
-  margin: 12px 0 20px 0;
-  -webkit-overflow-scrolling: touch;
-  /* hide visible scrollbar on desktop but keep scrolling functional; visible on small screens via media query */
-  -ms-overflow-style: none; /* IE/Edge */
-  scrollbar-width: none; /* Firefox */
-  position: relative; /* for fade masks */
-  /* add horizontal padding so cards never sit directly under the left/right fade masks */
-  padding: 0 72px;
-}
-.card-loop::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
-}
-.card-track {
+  margin: 0 0 16px;
   display: flex;
-  gap: 18px;
-  align-items: stretch;
-}
-.card-item {
-  flex: 0 0 220px; /* fixed card width for consistent scrolling */
-  max-width: 220px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-/* Fade masks on left and right edges to soften cut-off */
-.card-loop::before,
-.card-loop::after {
+.title-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40px) rotateX(-90deg);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skills-section.visible .title-word:nth-child(1) {
+  transition-delay: 0.1s;
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+.skills-section.visible .title-word:nth-child(2) {
+  transition-delay: 0.2s;
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+.skills-section.visible .title-word:nth-child(3) {
+  transition-delay: 0.3s;
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+
+.title-word.accent {
+  background: linear-gradient(135deg, var(--accent), #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.skills-subtitle {
+  font-size: 18px;
+  color: var(--muted);
+  margin: 0 0 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease 0.4s;
+}
+
+.skills-section.visible .skills-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.title-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  opacity: 0;
+  transition: opacity 0.6s ease 0.5s;
+}
+
+.skills-section.visible .title-decoration {
+  opacity: 1;
+}
+
+.title-decoration .line {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: lineGlow 2s ease-in-out infinite;
+}
+
+.title-decoration .diamond {
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  transform: rotate(45deg);
+  animation: diamondPulse 2s ease-in-out infinite;
+}
+
+@keyframes lineGlow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes diamondPulse {
+  0%,
+  100% {
+    transform: rotate(45deg) scale(1);
+  }
+  50% {
+    transform: rotate(45deg) scale(1.2);
+  }
+}
+
+/* Scrolling Marquee */
+.skills-marquee {
+  overflow: hidden;
+  padding: 20px 0;
+  background: linear-gradient(
+    90deg,
+    var(--bg),
+    transparent 5%,
+    transparent 95%,
+    var(--bg)
+  );
+  position: relative;
+}
+
+.skills-marquee::before,
+.skills-marquee::after {
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 72px;
-  pointer-events: none;
+  width: 100px;
   z-index: 2;
+  pointer-events: none;
 }
-.card-loop::before {
+
+.skills-marquee::before {
   left: 0;
-  /* fade from the section background into transparent so cards beneath remain readable */
-  background: linear-gradient(to right, var(--bg), transparent);
+  background: linear-gradient(90deg, var(--bg), transparent);
 }
-.card-loop::after {
+
+.skills-marquee::after {
   right: 0;
-  background: linear-gradient(to left, var(--bg), transparent);
+  background: linear-gradient(-90deg, var(--bg), transparent);
 }
-.skill-card {
-  background: white;
-  border-radius: 12px;
-  padding: 14px;
-  box-shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
-  height: 140px; /* fixed height so all cards match */
-  color: var(--text);
+
+.marquee-track {
   display: flex;
-  align-items: center;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  gap: 48px;
+  animation: marqueeScroll 30s linear infinite;
+  width: max-content;
 }
 
-.skill-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(16, 24, 40, 0.1);
-}
-
-.skill-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 10px;
-  /* show the original colored logos by keeping the icon background transparent */
-  background: transparent;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: inherit;
-  font-size: 22px;
-}
-.skill-logo {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  display: block;
-  /* ensure no grayscale or tint is applied so colored SVGs show as authored */
-  filter: none;
-}
-.skill-icon-fallback {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text);
-  /* neutral placeholder background when logo isn't available */
-  width: 40px;
-  height: 40px;
-  background: #f3f4f6;
-  border-radius: 8px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 1;
-  text-transform: uppercase;
-}
-.skill-title {
-  margin: 0 0 6px 0;
-  font-size: 16px;
-  color: var(--text);
-}
-.skill-desc {
-  margin: 0;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.skill-info {
-  margin-left: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* Note: auto-scroll is JS-driven; we intentionally do NOT pause on hover so the loop keeps moving */
-
-/* iOS CSS-based animation fallback - more reliable on iOS Safari */
-.card-loop-css {
-  overflow: hidden; /* Hide scrollbar for CSS animation mode */
-  -webkit-overflow-scrolling: auto; /* Disable momentum scrolling for CSS mode */
-}
-
-.card-track-css {
-  animation: scrollLoop 20s linear infinite;
-  will-change: transform;
-  -webkit-transform: translate3d(0, 0, 0); /* Force GPU acceleration on iOS */
-  transform: translate3d(0, 0, 0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-@-webkit-keyframes scrollLoop {
-  0% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(-50%, 0, 0);
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@keyframes scrollLoop {
-  0% {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    -webkit-transform: translate3d(-50%, 0, 0);
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-/* Pause animation on touch/hover for iOS */
-.card-loop-css:hover .card-track-css,
-.card-loop-css:active .card-track-css {
-  -webkit-animation-play-state: paused;
+.marquee-track:hover {
   animation-play-state: paused;
 }
 
-/* Respect user's reduced motion preference */
-@media (prefers-reduced-motion: reduce) {
-  .card-track-css {
-    animation: none;
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
 
-@media (max-width: 1000px) {
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.marquee-item:hover {
+  color: var(--color);
+  transform: scale(1.1);
+}
+
+.marquee-item svg {
+  font-size: 24px;
+  color: var(--color);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.marquee-item:hover svg {
+  opacity: 1;
+  transform: rotate(10deg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skills-section {
+    padding: 60px 0;
+  }
+
+  .skills-title {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .marquee-track {
+    gap: 32px;
   }
 }
-@media (max-width: 640px) {
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
-  /* show scrollbar on small screens */
-  .card-loop {
-    -ms-overflow-style: auto;
-    scrollbar-width: auto;
-  }
-  .card-loop::-webkit-scrollbar {
-    display: block;
-    height: 8px;
-  }
-  .card-loop::-webkit-scrollbar-thumb {
-    background: rgba(34, 34, 34, 0.2);
-    border-radius: 4px;
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .particle,
+  .marquee-track,
+  .title-word,
+  .skills-badge,
+  .skills-subtitle {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

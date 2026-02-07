@@ -3,13 +3,13 @@ import Navbar from "./Navbar";
 import Hero from "./Hero";
 import "./styles/styles.css";
 import "./styles/cursor.css";
-import Skills from "./Skills";
 import Contact from "./Contact";
-import Projects from "./Projects";
 import Footer from "./Footer";
+import Projects from "./Projects";
 import { initCustomCursor } from "./utils/customCursor";
 import Splash from "./Splash";
 import ChatBot from "./ChatBot";
+import TechNews from "./TechNews";
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -89,35 +89,40 @@ function App() {
               </div>
 
               <div className="about-right fade-up">
-                <div className="mini-avatar card">
-                  <img
-                    className="mini-av-img"
-                    src={process.env.PUBLIC_URL + "/images/avatar1.png"}
-                    alt="avatar small"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      borderRadius: 8,
-                    }}
-                  />
+                <div className="skills-card card">
+                  <h3 className="skills-card-title">My Skills</h3>
+                  <div className="skills-list">
+                    {[
+                      { name: "JavaScript", level: 90 },
+                      { name: "React", level: 85 },
+                      { name: "Node.js", level: 85 },
+                      { name: "Python", level: 80 },
+                      { name: "SQL", level: 75 },
+                    ].map((skill, i) => (
+                      <div
+                        className="skill-row"
+                        key={skill.name}
+                        style={{ "--delay": `${i * 0.1}s` }}
+                      >
+                        <div className="skill-info">
+                          <span className="skill-name">{skill.name}</span>
+                          <span className="skill-percent">{skill.level}%</span>
+                        </div>
+                        <div className="skill-bar">
+                          <div
+                            className="skill-fill"
+                            style={{ "--width": `${skill.level}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-
-                <ul className="about-bullets">
-                  <li>
-                    With hands-on coursework and internships, I build
-                    user-focused web apps.
-                  </li>
-                  <li>
-                    I enjoy collaborating, learning new technologies, and
-                    shipping features end-to-end.
-                  </li>
-                </ul>
               </div>
             </div>
           </section>
 
-          <Skills />
+          <TechNews />
 
           <Projects />
 
