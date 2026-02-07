@@ -4,7 +4,6 @@ import {
   FaJsSquare,
   FaReact,
   FaServer,
-  FaCode,
   FaGitAlt,
   FaDatabase,
   FaMobileAlt,
