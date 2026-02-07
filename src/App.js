@@ -9,6 +9,7 @@ import Projects from "./Projects";
 import Footer from "./Footer";
 import { initCustomCursor } from "./utils/customCursor";
 import Splash from "./Splash";
+import ChatBot from "./ChatBot";
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -124,6 +125,9 @@ function App() {
         </main>
         <Footer />
       </div>
+
+      {/* AI Chat Assistant */}
+      {!showSplash && <ChatBot />}
     </>
   );
 }

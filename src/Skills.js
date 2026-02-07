@@ -56,13 +56,14 @@ export default function Skills() {
     const el = containerRef.current;
     if (!el) return;
 
-    const speed = 0.6; // pixels per frame
+    const speed = 0.5; // pixels per frame
 
     function step() {
       if (!pausedRef.current) {
         el.scrollLeft += speed;
+        // Reset to beginning when we've scrolled through half (the duplicated content)
         if (el.scrollLeft >= el.scrollWidth / 2) {
-          el.scrollLeft -= el.scrollWidth / 2;
+          el.scrollLeft = 0;
         }
       }
       rafRef.current = requestAnimationFrame(step);
@@ -113,7 +114,7 @@ export default function Skills() {
       scheduleResume(800);
     };
 
-    // Touch drag (mobile)
+    // Touch drag (mobile) - use passive listeners for better iOS performance
     const onTouchStart = (e) => {
       dragRef.current.isDown = true;
       dragRef.current.startX = e.touches[0].pageX - el.offsetLeft;
@@ -145,9 +146,10 @@ export default function Skills() {
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
 
-    el.addEventListener("touchstart", onTouchStart, { passive: false });
-    el.addEventListener("touchmove", onTouchMove, { passive: false });
-    el.addEventListener("touchend", onTouchEnd);
+    // Use passive touch listeners for better scroll performance
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove", onTouchMove, { passive: true });
+    el.addEventListener("touchend", onTouchEnd, { passive: true });
 
     el.addEventListener("focusin", onFocusIn);
     el.addEventListener("focusout", onFocusOut);
