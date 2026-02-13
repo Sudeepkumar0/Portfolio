@@ -10,9 +10,33 @@ import { initCustomCursor } from "./utils/customCursor";
 import Splash from "./Splash";
 import ChatBot from "./ChatBot";
 import TechNews from "./TechNews";
+import {
+  FaGraduationCap,
+  FaGithub,
+  FaLinkedin,
+  FaCode,
+  FaProjectDiagram,
+  FaBookReader,
+} from "react-icons/fa";
+import { SiSpringboot, SiReact } from "react-icons/si";
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const carouselImages = [
+    "/crimages/cr1.jpeg",
+    "/crimages/cr2.jpeg",
+    "/crimages/cr3.jpeg",
+  ];
+
+  // Auto-rotate carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [carouselImages.length]);
 
   // initialize custom cursor only after splash hides (so it doesn't show through)
   useEffect(() => {
@@ -47,43 +71,121 @@ function App() {
             </h2>
             <div className="about-grid">
               <div className="about-left fade-up">
-                <p>
-                  I'm a Computer Science student currently pursuing an MCA at
-                  NMIT Bangalore with a focus on web development and software
-                  engineering. I enjoy building practical, well-tested projects
-                  using React, Node.js and SQL, and I like exploring modern
-                  tooling such as TypeScript, containerization, and CI/CD.
-                  Through coursework in algorithms, databases and software
-                  engineering, and via personal and open-source projects,
-                  I&nbsp;build and ship end-to-end features. I'm actively
-                  seeking internships and collaborative opportunities to grow as
-                  a full-stack developer.
-                </p>
+                {/* Education Timeline */}
+                <div className="education-timeline">
+                  <h3 className="education-title">
+                    <FaGraduationCap className="education-icon" />
+                    Education
+                  </h3>
+                  <div className="timeline">
+                    {[
+                      {
+                        year: "2024 - Present",
+                        degree: "Master of Computer Applications",
+                        school: "NMIT Bangalore",
+                        detail: "Full Stack Development",
+                      },
+                      {
+                        year: "2021 - 2024",
+                        degree: "Bachelor of Vocational Courses",
+                        school: "SDM College Ujire",
+                        detail: "Software & Application Development",
+                      },
+                      {
+                        year: "2019 - 2021",
+                        degree: "Pre-University Course (PUC)",
+                        school: "SDM PU College Ujire",
+                        detail: "PCMS",
+                      },
+                    ].map((edu, i) => (
+                      <div
+                        className="timeline-item"
+                        key={i}
+                        style={{ "--delay": `${i * 0.15}s` }}
+                      >
+                        <div className="timeline-marker"></div>
+                        <div className="timeline-content">
+                          <span className="timeline-year">{edu.year}</span>
+                          <h4 className="timeline-degree">{edu.degree}</h4>
+                          <p className="timeline-school">{edu.school}</p>
+                          <span className="timeline-detail">{edu.detail}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div className="about-center fade-up">
-                <div className="stat-card card">
-                  <div className="stat-top">
-                    <div className="stat-num">6+</div>
-                    <div className="stat-label">Projects Completed</div>
-                  </div>
-                  <p className="stat-desc">
-                    Coursework and personal projects across frontend and
-                    backend.
-                  </p>
-
-                  <div className="stat-image card" style={{ marginTop: 16 }}>
-                    <img
-                      src={process.env.PUBLIC_URL + "/images/avatar1.png"}
-                      alt="avatar"
+                <div className="profile-card card">
+                  {/* Image Carousel */}
+                  <div className="carousel">
+                    <div
+                      className="carousel-track"
                       style={{
-                        width: "100%",
-                        height: "0%",
-                        display: "block",
-                        borderRadius: 8,
-                        objectFit: "cover",
+                        transform: `translateX(-${currentSlide * 100}%)`,
                       }}
-                    />
+                    >
+                      {carouselImages.map((img, i) => (
+                        <div className="carousel-slide" key={i}>
+                          <img
+                            src={process.env.PUBLIC_URL + img}
+                            alt={`Profile ${i + 1}`}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                    <div className="carousel-dots">
+                      {carouselImages.map((_, i) => (
+                        <button
+                          key={i}
+                          className={`carousel-dot ${currentSlide === i ? "active" : ""}`}
+                          onClick={() => setCurrentSlide(i)}
+                          aria-label={`Go to slide ${i + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* About Me Text */}
+                  <div className="profile-bio">
+                    <p>
+                      I'm a Computer Science student pursuing MCA at NMIT
+                      Bangalore, passionate about building scalable web
+                      applications. With hands-on experience in React, Node.js,
+                      and SQL databases, I love transforming ideas into
+                      functional, user-friendly products. Currently diving
+                      deeper into TypeScript, containerization, and CI/CD
+                      pipelines. Open to internships and exciting collaboration
+                      opportunities.
+                    </p>
+
+                    {/* Social Links + CTA */}
+                    <div className="profile-actions">
+                      <div className="social-icons">
+                        <a
+                          href="https://github.com/Sudeepkumar0"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="social-icon github"
+                          aria-label="GitHub"
+                        >
+                          <FaGithub />
+                        </a>
+                        <a
+                          href="https://linkedin.com/in/yourprofile"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="social-icon linkedin"
+                          aria-label="LinkedIn"
+                        >
+                          <FaLinkedin />
+                        </a>
+                      </div>
+                      <a href="#contact" className="cta-btn">
+                        Let's Connect
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -116,6 +218,37 @@ function App() {
                         </div>
                       </div>
                     ))}
+                  </div>
+                </div>
+
+                {/* Quick Stats + Currently Learning */}
+                <div className="stats-learning-card card">
+                  <div className="quick-stats-grid">
+                    <div className="stat-box">
+                      <FaProjectDiagram className="stat-box-icon" />
+                      <span className="stat-box-num">5+</span>
+                      <span className="stat-box-label">Projects</span>
+                    </div>
+                    <div className="stat-box">
+                      <FaCode className="stat-box-icon" />
+                      <span className="stat-box-num">200+</span>
+                      <span className="stat-box-label">Commits</span>
+                    </div>
+                  </div>
+
+                  <div className="currently-learning">
+                    <h4 className="learning-title">
+                      <FaBookReader className="learning-icon" />
+                      Currently Learning
+                    </h4>
+                    <div className="learning-tags">
+                      <span className="learning-tag springboot">
+                        <SiSpringboot /> Spring Boot
+                      </span>
+                      <span className="learning-tag react">
+                        <SiReact /> React
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
