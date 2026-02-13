@@ -87,7 +87,7 @@ export default function TicTacToe({ onClose }) {
           setIsPlayerTurn(true);
         }
         setBotThinking(false);
-      }, 600); // Delay for bot "thinking"
+      }, 200); // Reduced delay for faster response
 
       return () => clearTimeout(timer);
     }
