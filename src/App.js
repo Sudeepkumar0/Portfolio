@@ -1,3 +1,4 @@
+import ProfessionalExperience from "./ProfessionalExperience";
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
@@ -12,7 +13,7 @@ import { initCustomCursor } from "./utils/customCursor";
 import Splash from "./Splash";
 import ChatBot from "./ChatBot";
 import TechNews from "./TechNews";
-import TicTacToe from "./TicTacToe";
+import SudokuGame from "./SudokuGame";
 import {
   FaGraduationCap,
   FaGithub,
@@ -264,6 +265,7 @@ function App() {
           <TechNews />
 
           <Projects />
+          <ProfessionalExperience />
 
           <Contact />
         </main>
@@ -278,8 +280,8 @@ function App() {
         <CodePlayground onClose={() => setShowPlayground(false)} />
       )}
 
-      {/* Tic Tac Toe Modal */}
-      {showGame && <TicTacToe onClose={() => setShowGame(false)} />}
+      {/* Sudoku Game Modal */}
+      {showGame && <SudokuGame onClose={() => setShowGame(false)} />}
 
       {/* AI Chat Assistant */}
       {!showSplash && <ChatBot />}

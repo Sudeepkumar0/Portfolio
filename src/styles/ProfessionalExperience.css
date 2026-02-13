@@ -1,0 +1,14 @@
+.professional-experience-section {
+  margin-top: 48px;
+  padding: 32px 0;
+  background: linear-gradient(135deg, #f8eee9 0%, #e0f7fa 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 30px rgba(16, 24, 40, 0.08);
+}
+
+.experience-placeholder {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #888;
+  padding: 24px 0;
+}
