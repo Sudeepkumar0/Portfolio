@@ -76,6 +76,28 @@
   font-size: 0.9rem;
   color: var(--text);
 }
+
+/* Playground Pill (clickable) */
+.playground-pill {
+  border: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.playground-pill:hover {
+  background: rgba(240, 240, 240, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(16, 24, 40, 0.12);
+}
+
+.playground-pill .pill-icon {
+  font-size: 1rem;
+  color: #3c78c8;
+}
+
 .nav-left {
   margin-right: 0.6rem;
   position: absolute;
@@ -165,6 +187,28 @@
 }
 .nav-links li a:hover {
   background: rgba(255, 255, 255, 0.06);
+}
+
+/* Playground Button in Nav */
+.nav-playground-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(240, 240, 240, 0.9);
+  color: var(--text);
+  border: none;
+  border-radius: 8px;
+  padding: var(--link-pad-y) var(--link-pad-x);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-playground-btn:hover {
+  background: rgba(230, 230, 230, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 24, 40, 0.1);
 }
 
 /* helper: show items only on small screens (mobile hamburger) */
@@ -274,6 +318,26 @@
 
   .nav-links li a:hover {
     background: #f5f5f5;
+  }
+
+  .nav-playground-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+    padding: 12px 16px;
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .nav-playground-btn:hover {
+    background: #e5e5e5;
   }
 
   /* reveal mobile-only items inside the collapsed menu */

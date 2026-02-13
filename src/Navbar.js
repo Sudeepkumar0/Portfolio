@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./styles/Navbar.css";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaCode } from "react-icons/fa";
 
-export default function Navbar() {
+export default function Navbar({ onPlaygroundClick }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hiddenOnScroll, setHiddenOnScroll] = useState(false);
@@ -52,11 +52,14 @@ export default function Navbar() {
       }`}
     >
       <div className="nav-container">
-        {/* Left pill */}
-        <div className="nav-pill nav-left" aria-hidden>
-          <span className="status-dot" />
-          <span className="pill-text">available for projects</span>
-        </div>
+        {/* Left pill - Playground */}
+        <button
+          className="nav-pill nav-left playground-pill"
+          onClick={() => onPlaygroundClick && onPlaygroundClick()}
+        >
+          <FaCode className="pill-icon" />
+          <span className="pill-text">Playground</span>
+        </button>
 
         {/* Center rounded nav (brand circle + links) */}
         <div className="nav-center">
@@ -88,6 +91,18 @@ export default function Navbar() {
               <a role="menuitem" href="#contact" onClick={() => setOpen(false)}>
                 Contact
               </a>
+            </li>
+            <li role="none" className="mobile-only">
+              <button
+                role="menuitem"
+                className="nav-playground-btn"
+                onClick={() => {
+                  setOpen(false);
+                  onPlaygroundClick && onPlaygroundClick();
+                }}
+              >
+                <FaCode /> Playground
+              </button>
             </li>
             <li role="none" className="mobile-only">
               <a

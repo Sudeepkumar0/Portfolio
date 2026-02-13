@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./styles/Hero.css";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import { triggerConfetti } from "./utils/confetti";
 
 export default function Hero() {
   const [imgLoaded, setImgLoaded] = useState(false);
@@ -15,7 +16,7 @@ export default function Hero() {
       "Tech Enthusiast",
       "Open Source Enthusiast",
     ],
-    []
+    [],
   );
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayed, setDisplayed] = useState("");
@@ -128,13 +129,26 @@ export default function Hero() {
           </p>
 
           <div className="hero-actions">
-            <a className="btn btn-primary" href="#projects">
+            <a
+              className="btn btn-primary"
+              href="#projects"
+              onClick={triggerConfetti}
+            >
               View My Projects
             </a>
-            <a className="btn btn-ghost" href="#contact">
+            <a
+              className="btn btn-ghost"
+              href="#contact"
+              onClick={triggerConfetti}
+            >
               Contact Me
             </a>
-            <a className="btn btn-outline" href="docs/resume.pdf" download>
+            <a
+              className="btn btn-outline"
+              href="docs/resume.pdf"
+              download
+              onClick={triggerConfetti}
+            >
               Download CV
             </a>
           </div>

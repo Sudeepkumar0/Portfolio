@@ -1,10 +1,11 @@
 import React from "react";
 import "./styles/Footer.css";
-import { FaGithub, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaEnvelope, FaGamepad, FaCode } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
 
-export default function Footer() {
+export default function Footer({ onPlaygroundClick, onGameClick }) {
   const year = new Date().getFullYear();
+
   return (
     <footer className="site-footer" role="contentinfo">
       <div className="container footer-inner">
@@ -23,6 +24,24 @@ export default function Footer() {
         </div>
 
         <div className="footer-right">
+          <button
+            className="icon-link footer-action-btn"
+            onClick={onPlaygroundClick}
+            aria-label="Code Playground"
+            title="Code Playground"
+          >
+            <FaCode />
+          </button>
+
+          <button
+            className="icon-link footer-action-btn"
+            onClick={onGameClick}
+            aria-label="Play Tic Tac Toe"
+            title="Play Tic Tac Toe"
+          >
+            <FaGamepad />
+          </button>
+
           <a
             className="icon-link"
             href="https://github.com/Sudeepkumar0"

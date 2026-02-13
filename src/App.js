@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import Hero from "./Hero";
+import ScrollProgress from "./ScrollProgress";
+import CodePlayground from "./CodePlayground";
 import "./styles/styles.css";
 import "./styles/cursor.css";
 import Contact from "./Contact";
@@ -10,6 +12,7 @@ import { initCustomCursor } from "./utils/customCursor";
 import Splash from "./Splash";
 import ChatBot from "./ChatBot";
 import TechNews from "./TechNews";
+import TicTacToe from "./TicTacToe";
 import {
   FaGraduationCap,
   FaGithub,
@@ -23,6 +26,8 @@ import { SiSpringboot, SiReact } from "react-icons/si";
 function App() {
   const [showSplash, setShowSplash] = useState(true);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [showGame, setShowGame] = useState(false);
+  const [showPlayground, setShowPlayground] = useState(false);
 
   const carouselImages = [
     "/crimages/cr1.jpeg",
@@ -57,7 +62,8 @@ function App() {
           showSplash ? "app-root--hidden" : "app-root--visible"
         }`}
       >
-        <Navbar />
+        <ScrollProgress />
+        <Navbar onPlaygroundClick={() => setShowPlayground(true)} />
         <Hero />
 
         <main className="container main-content">
@@ -261,8 +267,19 @@ function App() {
 
           <Contact />
         </main>
-        <Footer />
+        <Footer
+          onPlaygroundClick={() => setShowPlayground(true)}
+          onGameClick={() => setShowGame(true)}
+        />
       </div>
+
+      {/* Code Playground Page */}
+      {showPlayground && (
+        <CodePlayground onClose={() => setShowPlayground(false)} />
+      )}
+
+      {/* Tic Tac Toe Modal */}
+      {showGame && <TicTacToe onClose={() => setShowGame(false)} />}
 
       {/* AI Chat Assistant */}
       {!showSplash && <ChatBot />}

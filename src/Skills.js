@@ -191,6 +191,34 @@ export default function Skills() {
             ))}
           </div>
         </div>
+
+        {/* Animated Skill Bars */}
+        <div className="skill-bars-container">
+          <h3 className="skill-bars-title">Proficiency Levels</h3>
+          <div className="skill-bars-grid">
+            {skills.slice(0, 6).map((s, i) => (
+              <div key={s.slug} className="skill-bar-item">
+                <div className="skill-bar-header">
+                  <span className="skill-bar-icon" style={{ color: s.color }}>
+                    {s.icon}
+                  </span>
+                  <span className="skill-bar-name">{s.title}</span>
+                  <span className="skill-bar-percent">{s.level}%</span>
+                </div>
+                <div className="skill-bar-track">
+                  <div
+                    className="skill-bar-fill"
+                    style={{
+                      width: isVisible ? `${s.level}%` : "0%",
+                      background: s.color,
+                      transitionDelay: `${i * 0.1}s`,
+                    }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
