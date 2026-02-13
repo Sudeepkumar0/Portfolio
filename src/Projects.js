@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/Projects.css";
-import { FaGithub, FaExternalLinkAlt, FaStar } from "react-icons/fa";
+import { FaGithub, FaStar } from "react-icons/fa";
 
 const projects = [
   {
