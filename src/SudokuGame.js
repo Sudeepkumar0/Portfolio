@@ -33,6 +33,37 @@ export default function SudokuGame({ onClose }) {
   const [won, setWon] = useState(false);
   const [errorCell, setErrorCell] = useState(null);
 
+  const handleInput = React.useCallback(
+    (value) => {
+      if (!selected) return;
+      const [row, col] = selected;
+      if (initialBoard[row][col] !== null) return;
+      if (value === 0) {
+        // Allow clearing cell with 0
+        const newBoard = board.map((r) => r.slice());
+        newBoard[row][col] = null;
+        setBoard(newBoard);
+        setErrorCell(null);
+        return;
+      }
+      if (value < 1 || value > 9) return;
+      if (!isValid(board, row, col, value)) {
+        setErrorCell([row, col]);
+        setTimeout(() => setErrorCell(null), 900);
+        return;
+      }
+      const newBoard = board.map((r) => r.slice());
+      newBoard[row][col] = value;
+      setBoard(newBoard);
+      setErrorCell(null);
+      setSelected([row, col]);
+      if (newBoard.every((row) => row.every((cell) => cell !== null))) {
+        setWon(true);
+      }
+    },
+    [selected, board],
+  );
+
   // Keyboard input handler
   React.useEffect(() => {
     function onKeyDown(e) {
@@ -61,40 +92,12 @@ export default function SudokuGame({ onClose }) {
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [selected, board]);
+  }, [selected, board, handleInput]);
 
   function handleSelect(row, col) {
     setSelected([row, col]);
   }
 
-  function handleInput(value) {
-    if (!selected) return;
-    const [row, col] = selected;
-    if (initialBoard[row][col] !== null) return;
-    if (value === 0) {
-      // Allow clearing cell with 0
-      const newBoard = board.map((r) => r.slice());
-      newBoard[row][col] = null;
-      setBoard(newBoard);
-      setErrorCell(null);
-      return;
-    }
-    if (value < 1 || value > 9) return;
-    if (!isValid(board, row, col, value)) {
-      setErrorCell([row, col]);
-      setTimeout(() => setErrorCell(null), 900);
-      return;
-    }
-    const newBoard = board.map((r) => r.slice());
-    newBoard[row][col] = value;
-    setBoard(newBoard);
-    setErrorCell(null);
-    // Keep cell selected after input for fast entry
-    setSelected([row, col]);
-    if (newBoard.every((row) => row.every((cell) => cell !== null))) {
-      setWon(true);
-    }
-  }
 
   function resetGame() {
     setBoard(initialBoard.map((row) => row.slice()));
